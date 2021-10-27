@@ -1,5 +1,5 @@
 from math import floor
-
+'''float/int'''
 
 def read_list():
     given = input("Dati numere separate prin virgula:")
@@ -43,19 +43,29 @@ def test_get_prim():
 test_get_prim()
 
 def get_longest_all_primes(lst):
+    '''
+    Toate numerele sunt formate din cifre prime
+    :param lst:
+    :return:
+    '''
     result=[]
     max=0
     poz=0
-    finallist=[]
+
     for i in lst:
         if get_prim(i) == True:
             result.append(i)
             poz=poz+1
         else:
             if poz>max:
+                finallist=[]
+                j=0
                 max=poz
                 for j in result:
                     finallist.append(j)
+            poz=0
+            result=[]
+
     return finallist
 
 
@@ -81,30 +91,84 @@ def test_cifre_prime():
 test_cifre_prime()
 
 def get_longest_prime_digits(lst):
+    '''
+    Toate numerele sunt formate din cifre prime.
+    :param lst:
+    :return:
+    '''
     result = [ ]
     max = 0
     poz = 0
-    finallist = [ ]
+
     for i in lst:
         if cifre_prime(i) == True:
             result.append(i)
             poz = poz + 1
         else:
             if poz >max:
+                finallist=[]
                 max = poz
                 for j in result:
                     finallist.append(j)
+            result=[]
     return finallist
 
 'problema 14'
 
+def part(n):
+    '''
+    Determinam daca partea fractionara este egala cu cea intreaga
+    :param n:
+    :return:True-partiile sunt egale,False-nu sunt egale
+    '''
+    intreg=int(n)
+    aux=n
+    while aux%1!=0:
+        aux=aux*10
+        intreg=intreg*10
+    aux=aux-intreg
+    aux=int(aux)
+    if aux==int(n):
+        return True
+    else:
+        return False
+
+
+
+
+def get_longest_equal_int_real(lst):
+    '''
+    Toate numerele au partea întreagă egală cu partea fracționară
+    :param lst:
+    :return:
+    '''
+    result = [ ]
+    max = 0
+    poz = 0
+    finallist=[]
+    for i in lst:
+        if part(i) == True:
+            result.append(i)
+            poz = poz + 1
+        else:
+
+            if poz > max:
+
+                finallist=[]
+                max = poz
+                for j in result:
+                    finallist.append(j)
+            result=[]
+
+    return finallist
 
 
 
 def print_main():
     print('1.Subsecventa numere prime. ')
-    print('2.Sbsecventa ')
+    print('2.Subsecventa ')
     print('3.Partea intreaga egala cu partea fractionara. ')
+    print('x.Iesire ')
 
 def main():
     while True:
@@ -119,9 +183,13 @@ def main():
             result=get_longest_prime_digits(lst)
             print(result)
         if op=='3':
-            '''lst=read_list_float()
+            lst=read_list_float()
             result = get_longest_equal_int_real(lst)
-            print(result)'''
+            print(result)
+        if op == 'x':
+            break
+        else:
+            print("Optiune gresita! Reincearca:")
 
 
 main()
